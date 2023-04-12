@@ -1,0 +1,35 @@
+
+--	This command does the CODE FIRST migration 
+
+add-migration initial -Context ApplicationDbContext
+
+--	This command executes the database update based on what was created in CODE FIRST
+update-database -Context ApplicationDbContext
+
+
+--	This command executes the DATABASE FIRST migration
+Scaffold-DbContext "Data Source=3.80.81.224:1521/SPRING2023PDB;User ID=DOOR_USER;Password=DOORPW"Oracle.EntityFrameworkCore -OutputDir Models -ContextDir Data -Project "DOOR.EF"  -Context "DOOROracleContext" -DataAnnotations -NoOnConfiguring -Force
+
+
+For Mac Users,  you have to run the CLI
+commands:
+
+First, install DOTNET EF in CLI:
+dotnet tool install --global dotnet-ef --version 6.0.15
+
+https://www.entityframeworktutorial.net/efcore/cli-commands-for-ef-core-migration.aspx
+
+Example...
+instead of add-migration initial
+it is:
+dotnet ef migrations add initial
+
+For Mac:
+Install .net 6.0 CLI, start the CLI
+Install EF:
+dotnet tool install --global dotnet-ef --version 6.0.15
+CD to root of project
+Add package 
+Microsoft.EntityFrameworkCore.Design to EF project
+
+dotnet ef dbcontext scaffold "Data Source=3.80.81.224:1521/SPRING2023PDB;User ID=UD_BRAGUI;Password=UD_BRAGUI" Oracle.EntityFrameworkCore --output-dir Models --context-dir Data --project "DOOR.EF" --context "DOOROracleContext" --data-annotations --force
